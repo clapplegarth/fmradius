@@ -28,28 +28,36 @@ The following is a loose plan on how the project will proceed:
     - Add the small box in the upper-left with the logo and location search field.
     - Add a few markers, just dummy elements.
     - Add a popup box to view information about these elements when clicked, tapped, etc.
-    - Add some shims for acceptable mobile display.  The "popup box" could span the whole screen on a small (phone) display, so it can be readable as a data sheet.
+    - Add some shims for acceptable mobile display.  The "pop-up box" could span the whole screen on a small (phone) display, so it can be readable as a data sheet.
+    - Have the location box actually move the map to the location entered by the user.
 
 4. **Database**
     - Convert a source of data for use with the maps.  Make this conversion reproducible, and establish a standard format for use with the application.
-    - Read and query data from this database based on a given area or range (namely, the maximum range that FM radio can transmit).
-    - Have an AJAX helper, like Oboe.js, load this data asynchronously.
+    - Read and query data from this database based on a given area or range.  The data should be returned as a table.
+    - Have an AJAX helper, like Oboe.js, load this data asynchronously.  Still as a table, for this step.
+    - Add functions to search the database based on certain criterion.
+    - Based on your earlier algorithm, create a field in the station table to store its approximate range.  This is the "max range" that will be used to quickly determine whether a marker should be rendered at a given level.
+
 
 5.  **Map Data**
     - Begin to change the makers from arbitrary data to data from the database.
-    - Represent the data on each marker; have the popup box on each marker list facts about the station.
-    - Draw radiuses around each marker to indicate its approximate range, given its power, Height Above Average Terrain, etc.
+    - Load coordinates from the database as blind markers on the map.
+    - Represent some data on each marker; have the pop-up box on each marker list facts about the station.
+    - Draw dummy radii around each marker to indicate its approximate range, based on the dummy "max range" algorithm you developed earlier.
+    - Find a way to have the map report its approximate bounds to the script that searches the database for stations.  Make sure that it includes a sizable margin to accommodate the maximum range of off-screen markers!  Then, cull the markers that do not appear in this radius.
 
 6. **Streamline**
     - After the previous goals are done, begin to optimize mobile performance.  Make sure that the site is tap-friendly.  Ensure that the map view can easily support the user choosing their location.
-    - Ensure cross-browser compatibility and validation.  Make sure metadata is complete.
+    - Ensure cross-browser compatibility and validation.  Make sure meta-data is complete.
     - Take steps to reduce load times.
     - The map should start out zoomed close to the user's location.  This could be geolocation-based, and since that usually results in the ISP's location, a multi-state level of zoom should be chosen by default.
 
 7. **Stretch Goals**
     - Remember that this project only spans one semester.  The object is to make a solid, reliable, simple but elegant app in that period of time.
+    - Have the location entry accept other station data, especially call signs.  Have it accept the first four letters of the call sign if it's a valid sign.  
     - Rather than generating the map for the whole US, there should be a static render of this map appear when the user first enters the site.  Clicking this map will record the click location on the image element, and load the "real" map, and zoom to that location.  This will prevent excessive database and network traffic.
     - Topography affecting signal radius.  Any displacement over the HAAT should reduce the signal radius significantly, as FM stations are line-of-sight.  This section should provide enough of a stretch goal.  The FCC has a resource at https://www.fcc.gov/encyclopedia/fm-service-contour-data-points to make this much easier.
     - Using Wikipedia to pull extended data, such as a station's name, motto, streaming URL, and other semantic data about each transmitter.  This could be a one-shot or cron job script to crawl Wikipedia slowly to grab and update the stream URLs.
+    - A "what's this mean?" option near the call sign, to provide information about how FM call signs work.
     - Even further on the previous idea, an embedded stream player could appear on the data page to immediately listen in to the station.
     - Other types of radio transmitters, like AM, could be represented on the map.
