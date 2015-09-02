@@ -13,7 +13,7 @@ The following is a loose plan on how the project will proceed:
     - Get information on how to calculate FM radio signal radius.  An algorithm that estimates the mileage based on a station's watt output and HAAT (height above average terrain) might be needed.  Topography should not factor into this until the stretch goal phase.
     - ✓ Browse for services that this application could compete or interfere with.  _Most services that locate radio stations are not quick map-based station lookup services.  They're generally static searches that pull up tables of data and custom GIS renders of single stations._
     - Browse FCC RFCs to learn more about the FM radio band in general: its general operating parameters, like minimum and maximum power and range.
-    - ✓ Find a source of data that provides information about basic station call signs, coordinates, and power.  _The FCC's data query for FM radio stations can return a tabulated set of stations that contains this information, as well as some useful metadata._
+    - ✓ Find a source of data that provides information about basic station call signs, coordinates, and power.  _The FCC's data query for FM radio stations can return a tabulated set of stations that contains this information, as well as some useful metadata.  Additionally, the FCC has a list of available contours for stations at https://www.fcc.gov/encyclopedia/fm-service-contour-data-points that can be rendered using a polygon shape on a Google map!_
     - Begin reading up on Google Maps' JS API.
     - If possible, consult with someone with radio and/or GIS knowledge.
 
@@ -49,7 +49,7 @@ The following is a loose plan on how the project will proceed:
 7. **Stretch Goals**
     - Remember that this project only spans one semester.  The object is to make a solid, reliable, simple but elegant app in that period of time.
     - Rather than generating the map for the whole US, there should be a static render of this map appear when the user first enters the site.  Clicking this map will record the click location on the image element, and load the "real" map, and zoom to that location.  This will prevent excessive database and network traffic.
-    - Topography affecting signal radius.  Any displacement over the HAAT should reduce the signal radius significantly, as FM stations are line-of-sight.  This section should provide enough of a stretch goal.
+    - Topography affecting signal radius.  Any displacement over the HAAT should reduce the signal radius significantly, as FM stations are line-of-sight.  This section should provide enough of a stretch goal.  The FCC has a resource at https://www.fcc.gov/encyclopedia/fm-service-contour-data-points to make this much easier.
     - Using Wikipedia to pull extended data, such as a station's name, motto, streaming URL, and other semantic data about each transmitter.  This could be a one-shot or cron job script to crawl Wikipedia slowly to grab and update the stream URLs.
     - Even further on the previous idea, an embedded stream player could appear on the data page to immediately listen in to the station.
     - Other types of radio transmitters, like AM, could be represented on the map.
