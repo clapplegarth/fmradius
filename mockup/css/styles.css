@@ -1,26 +1,10 @@
 html, body, #wrap
 {
-  height: 100%;
+  height: 100vh;
   padding: 0;
   margin: 0;
 }
-#cornerbox
-{
-  z-index: 2;
-  position: fixed;
-  top: 10px;
-  left: 10px;
-
-  width: 15%;
-  min-width: 100px;
-  height: 300px;
-  padding: 20px 0 0 20px;
-
-  background-color: white;
-
-}
-
 #map
 {
-  height: 100%;
+  height: 100vh;
 }
