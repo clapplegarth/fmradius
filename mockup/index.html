@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>PAGE TITLE</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--<link href="css/normalize.css" rel="stylesheet" media="all">-->
+	<link href="css/styles.css" rel="stylesheet" media="all">
+	<!--[if lt IE 9]><script src="js/html5shiv-printshiv.js" media="all"></script><![endif]-->
+</head>
+<body>
+  <div id="wrap">
+  	<div id="cornerbox">
+  		<h1>fmradius</h1>
+  		<nav role="search">
+        <input type="text" class="controls" id="searchTextField" name="searchTextField" placeholder="search box">
+  		</nav>
+  	</div>
+
+    <div id="map">
+    </div>
+	</div>
+
+	<!--<footer role="contentinfo">
+		<small>Copyright &copy; <time datetime="2015">2015</time></small>
+	</footer>-->
+
+
+  <script type="text/javascript">
+
+var map, searchbox;
+
+// Some default bounds -- these will be replaced with bindTo()
+/*var defaultBounds = new google.maps.LatLngBounds(
+  new google.maps.LatLng(-33.8902, 151.1759),
+  new google.maps.LatLng(-33.8474, 151.2631));
+var options = {
+  bounds: defaultBounds,
+  types: ['geocode','address']
+};*/
+
+function initMap() {
+  //document.alert('yes');
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: -34.397, lng: 150.644},
+    zoom: 8
+  });
+
+  searchbox = new google.maps.places.SearchBox(document.getElementById('searchTextField'));
+
+  map.addListener('bounds_changed', function() {
+  searchbox.setBounds(map.getBounds());
+});
+
+}
+
+  </script>
+  <script async defer
+    src=https://maps.googleapis.com/maps/api/js?key=AIzaSyCc_llU8ar99ImwCSzxa2uRX3Uflt4TllY&amp;callback=initMap&amp;libraries=geometry,places">
+  </script>
+
+</body>
+</html>
