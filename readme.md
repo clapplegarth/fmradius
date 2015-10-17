@@ -10,29 +10,29 @@ Project Plan
 The following is a loose plan on how the project will proceed:
 
 1. **Research**
-    - Get information on how to calculate FM radio signal radius.  An algorithm that estimates the mileage based on a station's watt output and HAAT (height above average terrain) might be needed.  Topography should not factor into this until the stretch goal phase.
+    - ✓ Get information on how to calculate FM radio signal radius.  An algorithm that estimates the mileage based on a station's watt output and HAAT (height above average terrain) might be needed.  Topography should not factor into this until the stretch goal phase.
     - ✓ Browse for services that this application could compete or interfere with.  _Most services that locate radio stations are not quick map-based station lookup services.  They're generally static searches that pull up tables of data and custom GIS renders of single stations._
-    - Browse FCC RFCs to learn more about the FM radio band in general: its general operating parameters, like minimum and maximum power and range.
+    - ✓ Browse FCC RFCs to learn more about the FM radio band in general: its general operating parameters, like minimum and maximum power and range.
     - ✓ Find a source of data that provides information about basic station call signs, coordinates, and power.  _The FCC's data query for FM radio stations can return a tabulated set of stations that contains this information, as well as some useful metadata.  Additionally, the FCC has a list of available contours for stations at https://www.fcc.gov/encyclopedia/fm-service-contour-data-points that can be rendered using a polygon shape on a Google map!_
-    - Begin reading up on Google Maps' JS API.
-    - If possible, consult with someone with radio and/or GIS knowledge.
+    - ✓ Begin reading up on Google Maps' JS API.
+    - ✓ If possible, consult with someone with radio and/or GIS knowledge.
 
 2. **Preparation**
     - ✓ Secure name and domain name. _Registered [`fmradi.us`](http://fmradi.us) ... This domain helps establish that this is a U.S.-only service (for now).  Also, `.io` is an expensive ccTLD..._
-    - Set up a database for use with the service.  Because this code will be available on GitHub, the database credentials cannot be stored in the source, but should be available in an arbitrary location server-side and included.
+    - ✓ Set up a database for use with the service.  Because this code will be available on GitHub, the database credentials cannot be stored in the source, but should be available in an arbitrary location server-side and included.
     - ✓ Secure hosting with MySQL. _I'll be using [NearlyFreeSpeech](http://nearlyfreespeech.net/), because it's cheap, low-traffic hosting._
 
 3. **Map Mockup**
-    - Create a quick thumbnail of the site and its various views.
-    - Add the main Google Maps view (takes up most of the page).
-    - Add the small box in the upper-left with the logo and location search field.
+    - ✓ Create a quick thumbnail of the site and its various views.
+    - ✓ Add the main Google Maps view (takes up most of the page).
+    - ✓ Add the small box in the upper-left with the logo and location search field.
     - Add a few markers, just dummy elements.
-    - Add a popup box to view information about these elements when clicked, tapped, etc.
+    - ✓ Add a popup box to view information about these elements when clicked, tapped, etc.
     - Add some shims for acceptable mobile display.  The "pop-up box" could span the whole screen on a small (phone) display, so it can be readable as a data sheet.
     - Have the location box actually move the map to the location entered by the user.
 
 4. **Database**
-    - Convert a source of data for use with the maps.  Make this conversion reproducible, and establish a standard format for use with the application.
+    - ✓ Convert a source of data for use with the maps.  Make this conversion reproducible, and establish a standard format for use with the application.
     - Read and query data from this database based on a given area or range.  The data should be returned as a table.
     - Have an AJAX helper, like Oboe.js, load this data asynchronously.  Still as a table, for this step.
     - Add functions to search the database based on certain criterion.

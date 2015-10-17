@@ -3,19 +3,52 @@
 <head>
 	<meta charset="utf-8">
 	<title>fmradi.us - Map FM Radio Stations </title>
-	<meta name="description" content="">
+	<meta name="description" content="A map of FM radio stations in the US showing approximate coverage, station info and transmitter stats.">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="css/normalize.css" rel="stylesheet" media="all">
+	<!--<link href="css/normalize.css" rel="stylesheet" media="all">-->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" media="all">
 	<link href="css/styles.css" rel="stylesheet" media="all">
 	<!--[if lt IE 9]><script src="js/html5shiv-printshiv.js" media="all"></script><![endif]-->
 </head>
-<body>
+<body id="index-body">
 	<div id="map">
 	</div>
 
-	<div id="cornerbox">
-		<h1>fmradius</h1>
+	<div id="splash" class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+	      <div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h1 class="modal-title titledrop">fmradi.us</h1>
+				</div>
+				<div class="modal-body">
+					<div style="text-align:center">
+						<p class="lead">Check out US FM radio coverage.</p>
+						<p class="lead">Look up your favorite stations.</p>
+						<p class="lead">See what's broadcasting near you.</p>
+					</div>
+					<form class="" action="map.html" method="GET">
+						<div class="form-group">
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="City, address, station name, call sign..."></input>
+								<span class="input-group-btn">
+									<button type="submit" class="btn btn-success">
+										<span class="glyphicon glyphicon-search" aria-label="Search"></span>
+									</button>
+								</span>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					Credits shall go here (Google, FCC)
+				</div>
+			</div>
+		</div>
 	</div>
 
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha256-Sk3nkD6mLTMOF0EOpNtsIry+s1CsaqQC1rVLTAy+0yc= sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+<script src="js/scripts.js"></script>
 </body>
 </html>

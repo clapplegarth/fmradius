@@ -4,7 +4,107 @@ html, body, #wrap
   padding: 0;
   margin: 0;
 }
+#index-body #map
+{
+  background: url(../mockupus.jpg) no-repeat;
+}
+
+#map-body #map
+{
+  background: url(../mockupmap.jpg) no-repeat;
+}
 #map
 {
   height: 100vh;
+  background-size: stretch;
+}
+
+#searchbox
+{
+  position: fixed;
+  top: 10px;
+  left: 10px;
+}
+
+#searchbox .input-group
+{
+  margin: 10px;
+}
+
+#searchbox .panel
+{
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+
+}
+
+#searchbox .panel-footer
+{
+  max-height: 75vh;
+  overflow: auto;
+
+}
+
+.titledrop
+{
+  text-align: center;
+  color: RebeccaPurple;
+}
+
+a, b
+{
+  font-weight: bold;
+  color: RebeccaPurple;
+}
+a:hover
+{
+  color: MediumPurple;
+}
+.databar
+{
+  padding: 8px;
+}
+/*
+.databar table, .databar-table
+{
+  width: 100%;
+  padding: 3px;
+}
+.databar-table tr
+{
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.databar-table td
+{
+  padding: 3px;
+}
+*/
+.databar .callsign
+{
+  text-align: center;
+}
+.databar
+{
+  background-color: #fafafa;
+}
+.databar table tbody tr
+{
+  /*background-color: white;*/
+}
+.databar table th
+{
+  font-size: 120%;
+}
+
+.databar table tr td:first-child
+{
+  font-weight: bold;
+}
+.databar table code
+{
+  background-color: transparent;
+}
+
+#morebutton
+{
+  text-align: center;
 }
