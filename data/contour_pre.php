@@ -1,7 +1,9 @@
 <?php
 // hello again php, old friend
 
-$contour_raw_path = "fm contour sample.txt";
+die("This script has been disabled to conserve resources.");
+
+$contour_raw_path = "FM_service_contour_current.txt";
 $output_path = "contour-import.txt";
 $polygon_count = 360.0;
 $polygon_desired_count = 90.0;
