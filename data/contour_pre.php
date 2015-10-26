@@ -12,6 +12,7 @@ if ($polygon_count < $polygon_desired_count)
 $cell_delimiter = "|";
 $coord_delimiter = ",";
 $json_array_delimiter = ", "; // between the latlon constructs in the dropin json
+$json_decimal_places = 4;
 
 $rawpos_application_id = 0;
 $rawpos_service_type = 1;
@@ -27,13 +28,15 @@ class FMContourObject
   public $call_sign = false;
   public $application_file = false;
   public $locus_raw;  // post-pipe-delimited raw coordinates with commas
+  public $locus_lat;  // raw lat
+  public $locus_lng;  // raw lng
   public $locus_json; // cooked coords for Marker drop-in to Google Maps API
   public $poly_raw = array();  // post-pipe-delimited raw Polygon with commas
   public $poly_json; // cooked coords for Polygon drop-in to Google Maps API
 
   function make_json_coordinates()
   {
-    global $polygon_count, $polygon_desired_count, $json_array_delimiter;
+    global $polygon_count, $polygon_desired_count, $json_array_delimiter, $json_decimal_places;
 
     // Begin the json string here:
     $this->poly_json = "[ ";
@@ -57,14 +60,27 @@ class FMContourObject
 
     $this->poly_json .= " ]; "; // "Close" the json array.
 
+    $this->locus_lat = $this->piped_to_raw_lat($this->locus_raw);
+    $this->locus_lng = $this->piped_to_raw_lng($this->locus_raw);
     $this->locus_json = $this->piped_to_gjson($this->locus_raw); // Don't forget to jsonize the locus.
   }
 
+  function piped_to_raw_lat($comma_pair)
+  {
+    $boom = explode(",",$comma_pair);
+    return trim($boom[0]);
+  }
+  function piped_to_raw_lng($comma_pair)
+  {
+    $boom = explode(",",$comma_pair);
+    return trim($boom[1]);
+  }
   function piped_to_gjson($comma_pair)
   {
+    global  $json_decimal_places;
     // convert comma-separated pair to google maps format
     $boom = explode(",",$comma_pair);
-    return "{lat: ". trim($boom[0]) .", lng: ". trim($boom[1]) . "}";
+    return "{lat:". number_format((float)trim($boom[0]), $json_decimal_places, '.', '') .",lng:". number_format((float)trim($boom[1]), $json_decimal_places, '.', '') . "}";
   }
 
   function print_data()
@@ -84,14 +100,16 @@ class FMContourObject
   function insert_row($db)
   {
     $db->query("
-      INSERT INTO `fmradius`.`polygons` (`application_id`, `service_type`, `call_sign`, `application_file`, `locus_json`, `poly_json`)
-      VALUES                            (:application_id,  :service_type,  :call_sign,  :application_file,  :locus_json,  :poly_json)",
+      INSERT INTO `fmradius`.`polygons` (`application_id`, `service_type`, `call_sign`, `application_file`, `locus_json`, `locus_lat`, `locus_lng`, `poly_json`)
+      VALUES                            (:application_id,  :service_type,  :call_sign,  :application_file,  :locus_json,  :locus_lat,  :locus_lng,  :poly_json)",
       [
         ":application_id" => $this->application_id,
         ":service_type" => $this->service_type,
         ":call_sign" => $this->call_sign,
         ":application_file" => $this->application_file,
         ":locus_json" => $this->locus_json,
+        ":locus_lat" => $this->locus_lat,
+        ":locus_lng" => $this->locus_lng,
         ":poly_json" => $this->poly_json
       ]
     );
@@ -109,7 +127,7 @@ if (($f_in = file($contour_raw_path)) && ($f_out = fopen($output_path, "w+")) )
     [],
     "There was a problem dropping the table.");
 
-  $db->query("CREATE TABLE `fmradius`.`polygons` ( `application_id` INT NOT NULL , `service_type` VARCHAR(10) NOT NULL DEFAULT 'FM' , `call_sign` VARCHAR(10) NOT NULL , `application_file` VARCHAR(16) NOT NULL , `locus_json` TEXT NOT NULL , `poly_json` TEXT NOT NULL ) ENGINE = MyISAM;",
+  $db->query("CREATE TABLE `fmradius`.`polygons` ( `application_id` INT NOT NULL , `service_type` VARCHAR(10) NOT NULL DEFAULT 'FM' , `call_sign` VARCHAR(10) NOT NULL , `application_file` VARCHAR(16) NOT NULL , `locus_json` TEXT NOT NULL , `locus_lat` FLOAT NOT NULL, `locus_lng` FLOAT NOT NULL, `poly_json` TEXT NOT NULL ) ENGINE = MyISAM;",
     [],
     "There was a problem creating the table.");
 

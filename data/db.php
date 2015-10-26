@@ -1,22 +1,29 @@
 <?php
 class DBConn
 {
-  function __construct()
+  function __construct($path="")
   {
     include('dbconn.php');
     $this->db = $db;
   }
-  function query($query, $params=[], $emessage="There was a problem handling a database request.")
+  function query($query, $params=[], $emessage="There was a problem handling a database request.", $returnresult = false)
   {
     try
     {
       $stmt = $this->db->prepare($query);
       $result = $stmt->execute($params);
-      return $result;
+      if ($returnresult)
+      {
+        return $result;
+      }
+      else
+      {
+        return $stmt;
+      }
     }
     catch(PDOException $ex)
     {
-        die(error_alert($ex->getMessage()));
+        die($emessage . "\r\n<br />" . $ex->getMessage());
     }
   }
 }
